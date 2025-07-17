@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom,provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import {
   provideHttpClient,
@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideToastr } from 'ngx-toastr';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { routes } from './app.routes';
 import { loadingInterceptor } from '@core/interceptors/loading-interceptor.service';
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideToastr(),
-    provideHttpClient(withInterceptors([loadingInterceptor]))
+    provideHttpClient(withInterceptors([loadingInterceptor])),
+    importProvidersFrom(ReactiveFormsModule)
   ],
 };

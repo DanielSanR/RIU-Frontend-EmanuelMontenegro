@@ -1,0 +1,35 @@
+<div class="edit-hero-container">
+  <h3 class="hero-title">Agregar Nuevo Héroe</h3>
+
+  <form [formGroup]="heroForm" (ngSubmit)="onSubmit()" class="hero-form">
+    <div class="input-container">
+      <label for="id">ID</label>
+      <input id="id" type="text" [ @prop ]="exp" readonly />
+    </div>
+
+    <div class="input-container">
+      <label for="superhero">Nombre del Héroe</label>
+      <input id="superhero" type="text" [ @prop ]="exp" />
+    </div>
+
+    <div class="input-container">
+      <label for="comic">Comic</label>
+      <input id="comic" type="text" [ @prop ]="exp" readonly />
+    </div>
+
+    <div class="input-container">
+      <label for="description">Descripción</label>
+      <textarea id="description" [ @prop ]="exp"></textarea>
+    </div>
+
+    <div class="btns_form">
+      <button mat-button type="button" class="btn_cancelar" (click)="cancelar()">
+        <span class="color">Cancelar</span>
+      </button>
+
+      <button mat-button type="submit" class="btn_actualizar" [disabled]="heroForm.invalid">
+        <span class="color">Agregar Héroe</span>
+      </button>
+    </div>
+  </form>
+</div>
