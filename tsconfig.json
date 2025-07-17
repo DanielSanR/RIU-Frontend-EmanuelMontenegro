@@ -24,8 +24,13 @@
       "@layout/*": ["app/layout/*"],
       "@features/*": ["app/features/*"],
       "@dashboard/*": ["app/dashboard/*"]
-    }
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ]
   },
+  "include": ["src"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
