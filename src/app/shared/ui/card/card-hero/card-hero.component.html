@@ -1,0 +1,19 @@
+<div class="hero-preview-overlay">
+  <div class="hero-card-glass">
+    <button
+      class="close-btn"
+      (click)="close()"
+      mat-icon-button
+      aria-label="Cerrar"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <div class="hero-img-portrait">
+      <img [src]="data.image" [alt]="data.name" />
+    </div>
+    <div class="hero-info-glass">
+      <h2 class="hero-name">{{ data.name }}</h2>
+      <p class="hero-description">{{ data.description || "Sin descripción." }}</p>
+    </div>
+  </div>
+</div>

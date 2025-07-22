@@ -1,1 +1,151 @@
-<p>list works!</p>
+<div class="list-heroes">
+  <app-search-filter
+    [primaryPlaceholder]="'Seleccione un Filtro'"
+    [secondaryPlaceholder]="'Buscar...'"
+    [options]="searchOptions"
+    [useMatSelect]="false"
+    [secondaryOptions]="heroNames"
+    (filterApplied)="onFilterApplied($event)"
+    (selectedOptionChange)="onSelectChange($event)"
+    (clear)="clearInputs()"
+  />
+
+  @if (!isMobile()) {
+  <div class="mat-table-wrapper">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z2 custom-table"
+    >
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let hero" data-label="ID">
+          {{ hero.id }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Imagen</th>
+        <td mat-cell *matCellDef="let hero" data-label="Imagen">
+          <img
+            [src]="
+              'assets/img/' + (hero.comic?.toLowerCase() || 'default') + '.jpeg'
+            "
+            [alt]="hero.superhero"
+            class="hero-thumbnail"
+            width="60"
+            height="60"
+            loading="lazy"
+            decoding="async"
+            (click)="openPreview(hero)"
+            style="cursor: pointer"
+          />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let hero" data-label="Nombre">
+          {{ hero.superhero }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <td mat-cell *matCellDef="let hero" data-label="Descripción">
+          {{ hero.description }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let hero" class="actions-cell" data-label="">
+          <button mat-icon-button class="icon-btn icon-add" (click)="addHero()">
+            <mat-icon>add</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            (click)="editHero(hero)"
+            class="icon-btn icon-edit"
+            matTooltip="Editar"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            (click)="deleteHero(hero)"
+            class="icon-btn icon-delete"
+            matTooltip="Eliminar"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  } @else {
+  <div class="heroes-cards">
+    @for (hero of paginatedCards; track hero.id) {
+    <div class="hero-card">
+      <img
+        [src]="
+          'assets/img/' + (hero.comic?.toLowerCase() || 'default') + '.jpeg'
+        "
+        [alt]="hero.superhero"
+        width="70"
+        height="70"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="hero-info">
+        <div class="id">{{ hero.id }}</div>
+        <h3>{{ hero.superhero }}</h3>
+        <p>{{ hero.description }}</p>
+        <div class="card-actions">
+          <button
+            mat-icon-button
+            class="icon-btn icon-add"
+            (click)="addHero()"
+            matTooltip="Añadir"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="icon-btn icon-edit"
+            (click)="editHero(hero)"
+            matTooltip="Editar"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="icon-btn icon-delete"
+            (click)="deleteHero(hero)"
+            matTooltip="Eliminar"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+  <div class="paginator-wrapper">
+    <mat-paginator
+      [length]="filteredHeroes.length"
+      [pageSize]="itemsPerPage"
+      [pageSizeOptions]="[3, 5, 10]"
+      [pageIndex]="currentPage"
+      showFirstLastButtons
+      aria-label="Selector de página"
+      (page)="onPageChange($event)"
+    ></mat-paginator>
+  </div>
+</div>

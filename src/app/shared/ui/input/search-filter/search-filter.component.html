@@ -1,0 +1,63 @@
+<div class="search-bar">
+  <div class="search-bar-picker input-wrapper">
+    <mat-select
+      class="FormInput size-48 input-field"
+      [value]="selectedOption()"
+      (selectionChange)="onSelectChange($event.value)"
+    >
+      <mat-option value="" disabled selected hidden>
+        {{ primaryPlaceholder() }}
+      </mat-option>
+
+      @for (option of options(); track option.value) {
+      <mat-option [value]="option.value">
+        {{ option.label }}
+      </mat-option>
+      }
+    </mat-select>
+  </div>
+
+  <div class="search-bar-input input-wrapper">
+    @if (useMatSelect()) {
+    <mat-select
+      class="FormInput size-48 input-field"
+      [value]="selectedSecondaryOption()"
+      (selectionChange)="selectedSecondaryOption.set($event.value)"
+    >
+      <mat-option value="" disabled selected hidden>
+        {{ secondaryPlaceholder() }}
+      </mat-option>
+
+      @for (option of secondaryOptions(); track option) {
+      <mat-option [value]="option">{{ option }}</mat-option>
+      }
+    </mat-select>
+    } @else {
+    <input
+      class="input-field"
+      matInput
+      [placeholder]="secondaryPlaceholder()"
+      [ngModel]="searchText()"
+      (ngModelChange)="onInputChange($event)"
+      (keypress)="onKeyPress($event)"
+    />
+    }
+  </div>
+
+  <div class="search-bar-buttons">
+    <button
+      class="action-button clear-button"
+      mat-raised-button
+      (click)="clearSearch()"
+    >
+      <mat-icon>delete</mat-icon> Limpiar
+    </button>
+    <button
+      class="action-button filter-button"
+      mat-raised-button
+      (click)="applyFilter()"
+    >
+      <mat-icon>filter_alt</mat-icon> Filtrar
+    </button>
+  </div>
+</div>

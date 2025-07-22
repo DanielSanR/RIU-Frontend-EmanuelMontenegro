@@ -1,0 +1,16 @@
+<div class="dialog-wrapper">
+  <div class="dialog-card">
+    <button class="close-btn" (click)="close()">✖</button>
+
+    <h2 class="dialog-title">Confirmar Eliminación</h2>
+    <p class="dialog-message">
+      ¿Estás seguro de que deseas eliminar al héroe
+      <strong>"{{ data.name }}"</strong>?
+    </p>
+
+    <div class="dialog-actions">
+      <button class="btn-cancel" (click)="close()">Cancelar</button>
+      <button class="btn-confirm" (click)="confirm()">Eliminar</button>
+    </div>
+  </div>
+</div>

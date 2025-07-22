@@ -1,0 +1,38 @@
+$riu-primary-color: #2c3e50;
+$riu-secondary-color: #18bc9c;
+$riu-accent-color: #f39c12;
+$riu-error-color: #ee4a38;
+$riu-success-color: #2ecc71;
+$riu-info-color: #4d1ee7;
+$riu-warning-color: #f1c40f;
+$riu-white-strong: #ffffff;
+
+$riu-gray-100: #f8f9fa;
+$riu-gray-200: #e9ecef;
+$riu-gray-300: #dee2e6;
+$riu-gray-400: #ced4da;
+$riu-gray-500: #adb5bd;
+$riu-gray-600: #6c757d;
+$riu-gray-700: #495057;
+$riu-gray-800: #343a40;
+$riu-gray-900: #212529;
+
+$font-family-base: "Roboto", sans-serif;
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-size-lg: 1.25rem;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+$spacer: 1rem;
+$padding-sm: 0.5rem;
+$padding-md: 1rem;
+$padding-lg: 2rem;
+$border-radius: 0.5rem;
+$card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;

@@ -1,0 +1,7 @@
+:host ::ng-deep .ngx-spinner {
+  z-index: 9999 !important;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

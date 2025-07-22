@@ -3,7 +3,6 @@ import { inject } from '@angular/core';
 import { finalize } from 'rxjs';
 import { SpinnerService } from '@core/services/spinner.service';
 
-
 export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const spinner = inject(SpinnerService);
   spinner.show();

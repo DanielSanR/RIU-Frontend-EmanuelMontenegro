@@ -29,10 +29,22 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
             "styles": [
-              "src/styles.scss"
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css" ,
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles/main.scss",
+              "node_modules/ngx-toastr/toastr.css"
+              
             ],
             "scripts": []
           },
@@ -85,13 +97,25 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+                {
+                  "glob": "**/*",
+                  "input": "public"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets",
+                  "output": "assets"
+                }
+              ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
             "styles": [
-              "src/styles.scss"
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles/main.scss",
+              "node_modules/ngx-toastr/toastr.css"
+              
             ],
             "scripts": []
           }

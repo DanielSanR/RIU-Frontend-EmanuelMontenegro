@@ -1,35 +1,108 @@
-<div class="edit-hero-container">
-  <h3 class="hero-title">Agregar Nuevo Héroe</h3>
+<div class="add-hero-container">
+  <div class="add-hero-card">
+    <h2 class="hero-title">Agregar Nuevo Héroe</h2>
 
-  <form [formGroup]="heroForm" (ngSubmit)="onSubmit()" class="hero-form">
-    <div class="input-container">
-      <label for="id">ID</label>
-      <input id="id" type="text" [ @prop ]="exp" readonly />
+    <div class="info-callout">
+      <strong>🛈 Instrucciones</strong>
+      <ul>
+        @for (rule of instrucciones; track rule) {
+        <li [innerHTML]="rule"></li>
+        }
+      </ul>
     </div>
 
-    <div class="input-container">
-      <label for="superhero">Nombre del Héroe</label>
-      <input id="superhero" type="text" [ @prop ]="exp" />
-    </div>
+    <form
+      [formGroup]="heroForm"
+      (ngSubmit)="onSubmit()"
+      class="hero-form"
+      autocomplete="off"
+    >
+      <div class="input-container">
+        <label>ID (autogenerado)</label>
+        <input type="text" formControlName="id" readonly />
+      </div>
 
-    <div class="input-container">
-      <label for="comic">Comic</label>
-      <input id="comic" type="text" [ @prop ]="exp" readonly />
-    </div>
+      <div class="input-container">
+        <label>Nombre del Héroe <span class="req">*</span></label>
+        <input
+          type="text"
+          formControlName="superhero"
+          maxlength="30"
+          (keypress)="onlyLetters($event)"
+          (paste)="onPaste($event, 'superhero')"
+          autocomplete="off"
+        />
+        <div class="field-error-wrapper">
+          <div
+            class="field-error"
+            [class.visible]="
+              heroForm.get('superhero')?.touched &&
+              heroForm.get('superhero')?.invalid
+            "
+          >
+            @if (heroForm.get('superhero')?.errors?.['required']) { El nombre es
+            requerido. } @else if
+            (heroForm.get('superhero')?.errors?.['pattern']) { Solo letras y
+            espacios, sin números. } @else if
+            (heroForm.get('superhero')?.errors?.['spam']) { No se permiten
+            cadenas repetidas ni nombres sin sentido. }
+          </div>
+        </div>
+      </div>
 
-    <div class="input-container">
-      <label for="description">Descripción</label>
-      <textarea id="description" [ @prop ]="exp"></textarea>
-    </div>
+      <div class="input-container">
+        <label>Editorial/Cómic</label>
+        <input type="text" formControlName="comic" readonly />
+      </div>
 
-    <div class="btns_form">
-      <button mat-button type="button" class="btn_cancelar" (click)="cancelar()">
-        <span class="color">Cancelar</span>
-      </button>
+      <div class="input-container">
+        <label>Descripción <span class="req">*</span></label>
+        <textarea
+          formControlName="description"
+          rows="3"
+          maxlength="100"
+          (keypress)="onlyLetters($event)"
+          (paste)="onPaste($event, 'description')"
+          autocomplete="off"
+        ></textarea>
+        <div class="field-error-wrapper">
+          <div
+            class="field-error"
+            [class.visible]="
+              heroForm.get('description')?.touched &&
+              heroForm.get('description')?.invalid
+            "
+          >
+            @if (heroForm.get('description')?.errors?.['required']) { La
+            descripción es requerida. } @else if
+            (heroForm.get('description')?.errors?.['minlength']) { Mínimo 50
+            caracteres para la descripción. } @else if
+            (heroForm.get('description')?.errors?.['pattern']) { Solo letras,
+            signos y espacios, sin números. } @else if
+            (heroForm.get('description')?.errors?.['spam']) { No se permiten
+            cadenas repetidas ni texto sin sentido. }
+          </div>
+        </div>
+      </div>
 
-      <button mat-button type="submit" class="btn_actualizar" [disabled]="heroForm.invalid">
-        <span class="color">Agregar Héroe</span>
-      </button>
-    </div>
-  </form>
+      <div class="btns_form">
+        <button
+          mat-button
+          class="btn_cancelar"
+          type="button"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+        <button
+          mat-button
+          class="btn_actualizar"
+          type="submit"
+          [disabled]="heroForm.invalid || isLoading"
+        >
+          Agregar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

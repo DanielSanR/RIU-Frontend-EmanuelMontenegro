@@ -1,13 +1,18 @@
-import { ApplicationConfig, importProvidersFrom,provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import {
-  provideHttpClient,
-  withInterceptors
-} from '@angular/common/http';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+  BrowserAnimationsModule,
+  provideAnimations,
+} from '@angular/platform-browser/animations';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { NgxSpinnerService } from 'ngx-spinner';
 import { routes } from './app.routes';
 import { loadingInterceptor } from '@core/interceptors/loading-interceptor.service';
 
@@ -15,9 +20,17 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideAnimationsAsync(),
-    provideToastr(),
+    provideAnimations(),
+    provideToastr({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true,
+      progressBar: true,
+    }),
+
     provideHttpClient(withInterceptors([loadingInterceptor])),
-    importProvidersFrom(ReactiveFormsModule)
+    importProvidersFrom([BrowserAnimationsModule], ReactiveFormsModule),
+    NgxSpinnerService,
   ],
 };

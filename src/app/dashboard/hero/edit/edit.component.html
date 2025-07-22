@@ -1,1 +1,44 @@
-<p>edit works!</p>
+<div class="edit-hero-container">
+  <div class="edit-hero-card">
+    <h2 class="hero-title">Actualizar un Héroe</h2>
+
+    <form [formGroup]="heroForm" (ngSubmit)="onSubmit()" class="hero-form">
+      <div class="info-callout">
+        <strong>🛈 Instrucciones:</strong>
+        <ul>
+          @for (rule of instrucciones; track rule) {
+          <li [innerHTML]="rule"></li>
+          }
+        </ul>
+      </div>
+      <div class="input-container">
+        <label>ID</label>
+        <input type="text" formControlName="id" readonly />
+      </div>
+
+      <div class="input-container">
+        <label>Nombre del Héroe</label>
+        <input type="text" formControlName="superhero" />
+      </div>
+
+      <div class="input-container">
+        <label>Descripción</label>
+        <textarea formControlName="description"></textarea>
+      </div>
+
+      <div class="btns_form">
+        <button
+          mat-button
+          class="btn_cancelar"
+          type="button"
+          (click)="cancelar()"
+        >
+          <span class="color">Cancelar</span>
+        </button>
+        <button mat-button class="btn_actualizar" type="submit">
+          <span class="color">Actualizar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
