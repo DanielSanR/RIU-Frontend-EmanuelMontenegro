@@ -5,46 +5,44 @@ import { Hero } from '@shared/models/hero.models';
 
 describe('HeroService', () => {
   let service: HeroService;
+  let toastrSpy: jasmine.SpyObj<ToastrService>;
 
   beforeEach(() => {
+    toastrSpy = jasmine.createSpyObj('ToastrService', [
+      'success',
+      'error',
+      'warning',
+      'info',
+    ]);
+
     TestBed.configureTestingModule({
-      providers: [
-        HeroService,
-        {
-          provide: ToastrService,
-          useValue: {
-            success: () => {},
-            error: () => {},
-            warning: () => {},
-            info: () => {},
-          },
-        },
-      ],
+      providers: [HeroService, { provide: ToastrService, useValue: toastrSpy }],
     });
 
     service = TestBed.inject(HeroService);
   });
 
-  it('should be created', () => {
+  it('debería crearse correctamente', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return all heroes', (done) => {
+  it('debería devolver todos los héroes', (done) => {
     service.getHeroes().subscribe((heroes) => {
       expect(heroes.length).toBeGreaterThan(0);
       done();
     });
   });
 
-  it('should return hero by ID', (done) => {
+  it('debería devolver un héroe por su ID', (done) => {
     service.getHeroById('1').subscribe((hero) => {
       expect(hero.superhero).toBe('Batman');
       done();
     });
   });
 
-  it('should return error if hero ID does not exist', (done) => {
+  it('debería devolver error si el ID del héroe no existe', (done) => {
     service.getHeroById('999').subscribe({
+      next: () => {},
       error: (err) => {
         expect(err.message).toContain('no fue encontrado');
         done();
@@ -52,22 +50,22 @@ describe('HeroService', () => {
     });
   });
 
-  it('should search heroes by term', (done) => {
+  it('debería buscar héroes por término', (done) => {
     service.searchHeroes('man').subscribe((results) => {
       expect(results.length).toBeGreaterThan(0);
       expect(
         results.some((h) => h.superhero.toLowerCase().includes('man'))
-      ).toBeTrue();
+      ).toBe(true);
       done();
     });
   });
 
-  it('should add a new hero', (done) => {
+  it('debería agregar un nuevo héroe', (done) => {
     const newHero: Hero = {
       id: '',
       superhero: 'Test Hero',
       description: 'Descripción de test',
-      comic: 'test-comic',
+      
     };
 
     service.addHero(newHero).subscribe((hero) => {
@@ -77,7 +75,7 @@ describe('HeroService', () => {
     });
   });
 
-  it('should update an existing hero', (done) => {
+  it('debería actualizar un héroe existente', (done) => {
     const heroToUpdate = { ...service['heroes'][0], superhero: 'Updated Hero' };
 
     service.updateHero(heroToUpdate).subscribe((updated) => {
@@ -86,15 +84,16 @@ describe('HeroService', () => {
     });
   });
 
-  it('should return error if update fails', (done) => {
+  it('debería devolver error si la actualización falla', (done) => {
     const nonExistingHero: Hero = {
       id: '9999',
       superhero: 'Ghost',
       description: '',
-      comic: '',
+      
     };
 
     service.updateHero(nonExistingHero).subscribe({
+      next: () => {},
       error: (err) => {
         expect(err.message).toContain('no encontrado');
         done();
@@ -102,17 +101,18 @@ describe('HeroService', () => {
     });
   });
 
-  it('should delete an existing hero', (done) => {
+  it('debería eliminar un héroe existente', (done) => {
     const heroId = service['heroes'][0].id;
     service.deleteHero(heroId).subscribe(() => {
       const exists = service['heroes'].some((h) => h.id === heroId);
-      expect(exists).toBeFalse();
+      expect(exists).toBe(false);
       done();
     });
   });
 
-  it('should return error if delete fails', (done) => {
+  it('debería devolver error si la eliminación falla', (done) => {
     service.deleteHero('9999').subscribe({
+      next: () => {},
       error: (err) => {
         expect(err.message).toContain('no encontrado');
         done();

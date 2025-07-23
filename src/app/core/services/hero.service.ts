@@ -172,7 +172,7 @@ export class HeroService {
       id: (Math.max(...this.heroes.map((h) => +h.id), 0) + 1).toString(),
     };
     this.heroes.push(newHero);
-    this.syncSignal(); 
+    this.syncSignal();
     return of(newHero).pipe(delay(500));
   }
 

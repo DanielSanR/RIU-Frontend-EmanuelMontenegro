@@ -1,59 +1,42 @@
-# HeroesRiu
+# 🦸‍♂️ App de Mantenimiento de Superhéroes
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
+**Prueba Técnica – Angular 19 Standalone – RIU Heroes**
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Stack Tecnológico
 
-```bash
-ng serve
-```
+- **Angular 19.x** (standalone, lazy-loaded, signals, inject)
+- **Angular Material** (UI moderna y responsiva)
+- **Angular CDK** (Breakpoints y utilidades)
+- **RxJS 7.x** (reactividad everywhere)
+- **Ngx-Toastr** (notificaciones user friendly)
+- **Ngx-Spinner** (cargador global, conectado a HTTP)
+- **SCSS/SASS** (theming con variables)
+- **Typescript 5.x**
+- **Jasmine + Karma** (unit tests + coverage)
+- **Karma Coverage** (reporte visual HTML de cobertura)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## ✨ Features Principales
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **CRUD Completo** de superhéroes: alta, edición, borrado y detalle.
+- **Filtros avanzados** (por nombre, parámetro o ID) con componente standalone reutilizable.
+- **Listado paginado**, mobile-first y moderno.
+- **Dialogs personalizados** (preview con blur, confirmación con glassmorphism).
+- **Spinner global** (servicio + interceptor HTTP).
+- **UX moderna:** solo Toastr, sin alertas nativas.
+- **Arquitectura escalable:** separación clara por `core`, `dashboard/hero`, `shared/ui`, `layout`.
+- **Testing unitario exhaustivo** con cobertura alta en servicios y componentes críticos.
+- **Mock de datos embebido:** sin dependencia de backend externo ni json-server.
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🚦 Cómo ejecutar el proyecto
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. **Clonar el repositorio**
+   ```bash
+   git clone <URL_DEL_REPO>
+   cd heroes-riu
+   ```

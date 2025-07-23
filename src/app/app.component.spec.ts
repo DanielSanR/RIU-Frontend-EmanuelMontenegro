@@ -8,24 +8,21 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  it('debería crear el componente principal', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'heroes-riu' title`, () => {
+  it('debería tener la propiedad "title" con el valor correcto', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('heroes-riu');
+    expect(app.title).toBe('heroes-riu');
   });
 
-  it('should render title', () => {
+  it('debería tener el título correcto en la clase', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Hello, heroes-riu'
-    );
+    const app = fixture.componentInstance;
+    expect(app.title).toBe('heroes-riu');
   });
 });

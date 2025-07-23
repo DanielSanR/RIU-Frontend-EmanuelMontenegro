@@ -2,7 +2,12 @@
   <div class="edit-hero-card">
     <h2 class="hero-title">Actualizar un Héroe</h2>
 
-    <form [formGroup]="heroForm" (ngSubmit)="onSubmit()" class="hero-form">
+    <form
+      [formGroup]="heroForm"
+      (ngSubmit)="onSubmit()"
+      class="hero-form"
+      autocomplete="off"
+    >
       <div class="info-callout">
         <strong>🛈 Instrucciones:</strong>
         <ul>
@@ -11,6 +16,7 @@
           }
         </ul>
       </div>
+
       <div class="input-container">
         <label>ID</label>
         <input type="text" formControlName="id" readonly />
@@ -18,12 +24,55 @@
 
       <div class="input-container">
         <label>Nombre del Héroe</label>
-        <input type="text" formControlName="superhero" />
+        <input
+          type="text"
+          formControlName="superhero"
+          (keypress)="onlyLetters($event)"
+          (paste)="onPaste($event, 'superhero')"
+          autocomplete="off"
+        />
+        @if (heroForm.get('superhero')?.touched &&
+        heroForm.get('superhero')?.invalid) {
+        <div class="field-error">
+          @if (heroForm.get('superhero')?.errors?.['required']) {
+          <span>El nombre es <strong>obligatorio</strong>.</span>
+          } @if (heroForm.get('superhero')?.errors?.['pattern']) {
+          <span>Solo se permiten <strong>letras y espacios</strong>.</span>
+          } @if (heroForm.get('superhero')?.errors?.['spam']) {
+          <span>
+            El nombre contiene patrones repetitivos que no están permitidos.
+          </span>
+          }
+        </div>
+        }
       </div>
 
       <div class="input-container">
         <label>Descripción</label>
-        <textarea formControlName="description"></textarea>
+        <textarea
+          formControlName="description"
+          (paste)="onPaste($event, 'description')"
+          autocomplete="off"
+        ></textarea>
+        @if (heroForm.get('description')?.touched &&
+        heroForm.get('description')?.invalid) {
+        <div class="field-error">
+          @if (heroForm.get('description')?.errors?.['required']) {
+          <span>La descripción es <strong>obligatoria</strong>.</span>
+          } @if (heroForm.get('description')?.errors?.['minlength']) {
+          <span
+            >La descripción debe tener al menos
+            <strong>10 caracteres</strong>.</span
+          >
+          } @if (heroForm.get('description')?.errors?.['maxlength']) {
+          <span>Máximo 100 caracteres permitidos.</span>
+          } @if (heroForm.get('description')?.errors?.['pattern']) {
+          <span>Caracteres inválidos detectados, ¡nada de jeroglíficos!</span>
+          } @if (heroForm.get('description')?.errors?.['spam']) {
+          <span>Texto repetitivo o sin sentido no permitido.</span>
+          }
+        </div>
+        }
       </div>
 
       <div class="btns_form">
@@ -35,7 +84,12 @@
         >
           <span class="color">Cancelar</span>
         </button>
-        <button mat-button class="btn_actualizar" type="submit">
+        <button
+          mat-button
+          class="btn_actualizar"
+          type="submit"
+          [disabled]="heroForm.invalid"
+        >
           <span class="color">Actualizar</span>
         </button>
       </div>
