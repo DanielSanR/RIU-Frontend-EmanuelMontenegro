@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideToastr({
-      timeOut: 4000,
+      timeOut: 1800,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       closeButton: true,

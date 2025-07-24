@@ -803,18 +803,14 @@
       height: 44px;
       border-radius: 12px;
       font-size: 0.95rem;
-      background-color: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      outline: none;
+      box-shadow: none !important;
       color: $riu-white-strong;
       font-weight: 500;
       display: flex;
       align-items: center;
-      padding: 0 5px;
-
-      input::placeholder {
-        color: $riu-white-strong;
-        opacity: 0.7;
-      }
+      padding: 0 10px;
     }
 
     mat-select,
@@ -877,6 +873,10 @@
         color: $riu-info-color;
       }
     }
+  }
+  ::ng-deep .search-bar-input .input-field::placeholder {
+    color: #fff !important;
+    opacity: 1 !important;
   }
 }
 
@@ -1152,6 +1152,9 @@
     outline: none;
 
     mat-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       color: #fff;
       font-size: 1.3rem;
       font-weight: 900;
