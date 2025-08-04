@@ -1,3 +1,20 @@
+//en altas y editar es mejor usar siempre un formulario dinamico, asi evitas dos componentes distintos.Si tenes 5 abm en una app vas a tener 20 componentes y podrian ser solo 5
+// en este caso por la mala practica de no usar un form dinamico, los duplicas los validadores por ejemplo
+// los validadores tenes que poner en un archivo separado y reutilizarlos en los dos componentes
+// si usas un form dinamico junto con un servicio de configuracion podes simplificar mucho el codigo, tambien evitas poner las validacione en el html
+//por ej de descripcion : 
+/* {
+      name: 'description',
+      label: 'Descripción',
+      type: 'textarea',
+      placeholder: 'Descripción',
+      validations: {
+        required: false,
+        maxLength: 50,
+        pattern: 'aca iria el pattern',
+        patternErrorMessage: 'error de pattern.'
+      }
+    }, */
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import {
   FormBuilder,

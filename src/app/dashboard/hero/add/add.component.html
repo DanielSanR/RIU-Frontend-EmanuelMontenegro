@@ -40,6 +40,7 @@
               heroForm.get('superhero')?.invalid
             "
           >
+          <!-- podes usar una directiva, junto con un form dinamico y en un unico mat-error catcheas todos los errores-->
             @if (heroForm.get('superhero')?.errors?.['required']) { El nombre es
             requerido. } @else if
             (heroForm.get('superhero')?.errors?.['pattern']) { Solo letras y

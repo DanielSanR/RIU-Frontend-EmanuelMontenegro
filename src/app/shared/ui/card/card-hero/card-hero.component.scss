@@ -1,3 +1,4 @@
+//si usabas estilos globales, no tendrias que usar los mixins aca que estan mal y depaso te evitabas usar el scss de este componente
 @use "mixins" as *;
 
 @include hero-preview-style;

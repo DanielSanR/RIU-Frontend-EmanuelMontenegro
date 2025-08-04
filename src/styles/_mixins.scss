@@ -1,5 +1,32 @@
 @use "variables" as *;
+//Uso incorrecto de mixins, el uso de mixins es para evitar repetición de código y mejorar la mantenibilidad del CSS.
+// No cumple con el principio DRY (Don't Repeat Yourself).
+//ningun mixin recibe argumentos, lo que limita su reutilización y flexibilidad
+//ej de mixin que si estaria bien
+@mixin button-lg( $bg-color, $text-color) {
+  //reutilizamos este mixin en diferentes botones, primario, secundario, etc.
+  background-color: $bg-color;
+  color: $text-color;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: darken($bg-color, 10%);
+  }
+}
+//y se lo usa asi:
+// .btn-primary {
+//   @include button-lg($riu-primary-color, $riu-gray-100);
+// }
+//para los medias queries, es mejor usar mixins tipo mobile,tablet,desktop, asi se puede reutilizar el mismo mixin para diferentes componentes y evitar repetición de código
+//agrupar los estipos relacionados a lo responsive en un archivo separado ej responsive.scss
+// no usar ng-deep, es una mala práctica.
+//el blur y el color usado no cumplen con los principios de usabilidad y accesibilidad, el blur y el color dificultan del texto dificulta la lectura.
+//los th y td no tienen un width definido  si cambias de pagina el tamaño de cada celda es variable y no queda bien a la vista
+//el boton + no se ve bien a mitad de la pantalla por el tema del blur y el color elegido
 
+//todos estos estilos irian en main.scss o un archivo de estilos principal
 @mixin list-heroes-style {
   .list-heroes {
     height: 97vh;

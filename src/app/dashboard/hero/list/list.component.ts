@@ -43,7 +43,11 @@ import { SpinnerService } from '@core/services/spinner.service';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+//mal uso de signals, la idea de signals es hacer radiactivo el estado de los heroes, y usas loadheores para cargar los heroes y actualizar
+//en acciones tenes el + que no esta bien, es redundante tenerlo ahi por que es una accion global que refleja a toda la lista no a un heroe en concreto
+//podias poner el agregar heroe en al final de la seccion de filtro en la parte superior derecha ( despues de filtrar)
 export class ListComponent implements OnInit {
+  //podias usar signal para la paginacion
   currentPage = 0;
   itemsPerPage = 5;
   heroes: Hero[] = [];
@@ -75,7 +79,7 @@ export class ListComponent implements OnInit {
   private dialog = inject(MatDialog);
   private toastr = inject(ToastrService);
   private breakpointObserver = inject(BreakpointObserver);
-
+  //no hace falta este observer para la tabla nomas
   private isMobile$ = this.breakpointObserver
     .observe([Breakpoints.Handset])
     .pipe(map((result) => result.matches));
@@ -146,6 +150,7 @@ export class ListComponent implements OnInit {
               'Éxito',
               { enableHtml: true }
             );
+            // esto si usas computed la lista se actualiza solo
             this.loadHeroes();
           },
           error: () => {
@@ -165,6 +170,8 @@ export class ListComponent implements OnInit {
     this.filteredHeroes = [...this.heroes];
   }
 
+  //super complicado y poco legible el filter este
+  //podias usar un computed para filtrar los heroes y un setter
   onFilterApplied(searchText: string): void {
     const parsedId = Number(searchText);
     const query = searchText.trim().toLowerCase();

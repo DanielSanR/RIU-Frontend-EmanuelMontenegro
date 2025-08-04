@@ -8,6 +8,10 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class HeroService {
+  //queda mal visto tener datos hardcodeados en el servicio, podias usar un json o api falsa
+  //no hay persistencia, cada vez que recargas la app se resetean los datos
+  //podias usar localstorag o algun otro metodo para persistir los datos
+  // getheroes,getherobyid,searchheroes,syncSignal son metodos que no tendrias que usar si aplicas los signals correctamente
   private heroes: Hero[] = [
     {
       id: '1',
@@ -136,12 +140,12 @@ export class HeroService {
       comic: 'dc-cyborg',
     },
   ];
-
+ // mezclas observables y signals, lo ideal es usar uno u otro
+  //podias usar signals para hacer el estado reactivo y no tener que usar el sync
   private heroesSignal = signal<Hero[]>(this.heroes);
   heroes$ = this.heroesSignal.asReadonly();
 
   constructor(private toastr: ToastrService) {}
-
   private syncSignal(): void {
     this.heroesSignal.set([...this.heroes]);
   }

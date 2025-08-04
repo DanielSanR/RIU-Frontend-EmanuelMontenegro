@@ -9,7 +9,8 @@
     (selectedOptionChange)="onSelectChange($event)"
     (clear)="clearInputs()"
   />
-
+<!-- usas dos vistas, una para desktop y otra para mobile, en mobile no me carga la lista
+ si usas table lo ideal es hacerlo responsive , en mobile por ej a la descripcion podias darle un width definido y poner ...   -->
   @if (!isMobile()) {
   <div class="mat-table-wrapper">
     <table
